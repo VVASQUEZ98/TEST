@@ -1,83 +1,59 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import '../../App';
+import { ProjectForm } from "../proyectos/ProjectForm";
+import { SkillForm } from "../habilidades/SkillsForm";
+import { Grid, GridItem, Separator, Flex } from "@chakra-ui/react";
+import { EducationForm } from "../educacion/EducationForm";
+import { SignupForm } from "../perfil/SignupForm";
+import { ContactForm } from "../contacto/ContactForm";
+import { LanguageForm } from "../idiomas/LanguageForm";
+import { CompletitionCard } from "../CompletitionCard";
+import { UserImage } from "../perfil/UserImage";
+import { ReferenceForm } from "../referencias/ReferenceForm";
+import { ExperienceForm } from "../experience/ExperienceForm";
+import { useDispatch } from "react-redux";
+import { setFinished } from "../slices/UserSlice";
 
 const Form = ({ setUserData }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    title: "",
-    email: "",
-    phone: "",
-    linkedin: "",
-    experience: [],
-    education: [],
-    skills: [],
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setUserData(formData);
-  };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setFinished(false));
+  })
 
   return (
-    <form onSubmit={handleSubmit} className="form">
-      <h2>Llena tu currículum</h2>
-      <div className="form-group">
-        <label>Nombre:</label>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label>Título:</label>
-        <input
-          type="text"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label>Teléfono:</label>
-        <input
-          type="tel"
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label>LinkedIn:</label>
-        <input
-          type="url"
-          name="linkedin"
-          value={formData.linkedin}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <button type="submit">Generar Currículum</button>
-    </form>
+    <>
+      <CompletitionCard />
+      <Grid templateRows="repeat(1, 1fr)"
+        templateColumns="repeat(5, 1fr)"
+        gap={5}>
+        <GridItem rowSpan={2} colSpan={1} height="fit-content">
+          <Flex direction="column" gap="3">
+            <UserImage />
+            <Separator />
+            <EducationForm />
+            <Separator />
+            <ContactForm />
+            <Separator />
+            <ExperienceForm />
+          </Flex>
+        </GridItem>
+        <GridItem colSpan={4}>
+          <Flex direction="column" gap={5}>
+            <SignupForm />
+            <Separator />
+            <SkillForm />
+            <Separator />
+            <LanguageForm />
+            <Separator />
+            <ProjectForm />
+            <Separator />
+            <ReferenceForm />
+            <Separator />
+          </Flex>
+        </GridItem>
+      </Grid>
+
+    </>
   );
 };
 
