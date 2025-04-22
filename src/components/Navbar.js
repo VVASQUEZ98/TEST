@@ -1,95 +1,38 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Button } from './Button';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import './Navbar.css';
-import { ThemeContext } from './ThemeContext';
-import Switch from 'react-switch';
+import { Box, Flex, Heading, HStack, Link as ChakraLink, Group, Icon } from '@chakra-ui/react';
+import { ColorModeButton } from "./ui/color-mode"
+import { MdLabelImportant } from "react-icons/md";
 
 function Navbar() {
-  const [click, setClick] = useState(false);
-  const [button, setButton] = useState(true);
-  const { theme, toggleTheme, themeStyles } = useContext(ThemeContext);
-
-  const handleClick = () => setClick(!click);
-  const closeMobileMenu = () => setClick(false);
-
-  const showButton = () => {
-    if (window.innerWidth <= 960) {
-      setButton(false);
-    } else {
-      setButton(true);
-    }
-  };
-
-  useEffect(() => {
-    showButton();
-  }, []);
-
-  window.addEventListener('resize', showButton);
-
-  return (
-    <>
-      <nav className='navbar' style={{ background: themeStyles.navbar }}>
-        <div className='navbar-container'>
-          <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-            Grupo#6
-            <i class='fab fa-typo3' />
-          </Link>
-          <div className='menu-icon' onClick={handleClick}>
-            <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
-          </div>
-          <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-            <li className='nav-item'>
-              <Link to='/' className='nav-links' onClick={closeMobileMenu}>
-                Home
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link
-                to='/Forms'
-                className='nav-links'
-                onClick={closeMobileMenu}
-              >
-                Creacion de expediente
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link
-                to='/products'
-                className='nav-links'
-                onClick={closeMobileMenu}
-              >
-                Contactenos                                                                                               
-              </Link>
-            </li>
-            <li>
-              <Link
-                to='/sign-up'
-                className='nav-links-mobile'
-                onClick={closeMobileMenu}
-              >
-                Sign Up
-              </Link>
-            </li>
-            <li className='theme-toggle'>
-              <Switch
-                onChange={toggleTheme}
-                checked={theme === 'dark'}
-                offColor="#888"
-                onColor="#000"
-                uncheckedIcon={false}
-                checkedIcon={false}
-              />
-              <span style={{ color: themeStyles.text, marginLeft: '10px' }}>
-                {theme === 'light' ? 'Modo Oscuro' : 'Modo Claro'}
-              </span>
-            </li>
-          </ul>
-          {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
-        </div>
-      </nav>
-    </>
-  );
+    return (
+        <Box bg={{ _light: "gray.200", _dark: "gray.950" }} py="5" m="0" top="0" position="sticky" zIndex="max" overflow="hidden" width="100%">
+            <nav>
+                <Flex justifyContent="space-around">
+                    <Group>
+                        <Icon size="xl">
+                            <MdLabelImportant/>
+                        </Icon>
+                        <Heading> Grupo #6
+                        </Heading>
+                    </Group>
+                    <HStack>
+                        <ChakraLink asChild>
+                            <Link to='/' >
+                                Home
+                            </Link>
+                        </ChakraLink>
+                        <ChakraLink asChild>
+                            <Link to='/Forms' >
+                                Creación de expediente
+                            </Link>
+                        </ChakraLink>
+                        <ColorModeButton />
+                    </HStack>
+                </Flex>
+            </nav>
+        </Box>
+    );
 }
 
 export default Navbar;

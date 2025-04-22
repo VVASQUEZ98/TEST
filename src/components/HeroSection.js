@@ -1,20 +1,17 @@
-import React, { useContext } from 'react';
-import '../App.css';
-import { Button } from './Button';
-import './HeroSection.css';
+import React from 'react';
 import video from '../videos/video_1.mp4';
-import { ThemeContext } from './ThemeContext';
+import { Heading } from '@chakra-ui/react';
 
 function HeroSection() {
-  const { theme } = useContext(ThemeContext);
 
   return (
-    <div className='hero-container' style={{ background: theme.background, color: theme.color }}>
+    <div className='hero-container'>
       <video src={video} autoPlay loop muted />
-      <h1>Te damos la Bienvenida a tu portafolio</h1>
-      <p>la prueba del fracaso es el exito del futuro</p>
+      <Heading size="xl" justifySelf={"center"} my="3">
+        Te damos la Bienvenida a tu portafolio
+      </Heading>
       <div className='hero-btns'>
-        <Button
+        {/* <Button
           className='btns'
           buttonStyle='btn--outline'
           buttonSize='btn--large'
@@ -29,7 +26,7 @@ function HeroSection() {
           to='/#'
         >
           Como crear un portafolio <i className='far fa-play-circle' />
-        </Button>
+        </Button> */}
       </div>
     </div>
   );
