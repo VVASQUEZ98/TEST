@@ -1,55 +1,60 @@
-import React, { useContext } from 'react';
-import './Cards.css';
-import CardItem from './CardItem';
-import { ThemeContext } from './ThemeContext'; // Importa el ThemeContext
+import React from 'react';
+import { Card, HStack, Icon, Image, Text } from '@chakra-ui/react';
+import { FaArrowRight } from 'react-icons/fa6';
 
 function Cards() {
-  const { theme } = useContext(ThemeContext); // Obtén el tema actual
 
   return (
-    <div className='cards' style={{ background: theme.background }}>
-      <h1 style={{ color: theme.color }}>INOVANDO TU FUTURO!</h1>
+    <div className='cards'>
       <div className='cards__container'>
         <div className='cards__wrapper'>
-          <ul className='cards__items'>
-            <CardItem
-              src='../images/img-11.jpg'
-              text=''
-              label=''
-              path='/services'
-              style={{ color: theme.color }} // Cambia el color del texto según el tema
-            />
-            <CardItem
-              src='../images/img-12.jpg'
-              text=''
-              label=''
-              path='/services'
-              style={{ color: theme.color }} // Cambia el color del texto según el tema
-            />
-          </ul>
-          <ul className='cards__items'>
-            <CardItem
-              src='../images/img-13.jpg'
-              text=''
-              label=''
-              path='/services'
-              style={{ color: theme.color }} // Cambia el color del texto según el tema
-            />
-            <CardItem
-              src='../images/img-14.jpg'
-              text=''
-              label=''
-              path='/products'
-              style={{ color: theme.color }} // Cambia el color del texto según el tema
-            />
-            <CardItem
-              src='../images/img-15.jpg'
-              text=''
-              label=''
-              path='/sign-up'
-              style={{ color: theme.color }} // Cambia el color del texto según el tema
-            />
-          </ul>
+          <HStack justify="space-around" my="3">
+            <Card.Root width={'30%'} aspectRatio="square">
+              <Card.Header>
+                <Card.Title>Ingresa tus datos</Card.Title>
+              </Card.Header>
+              <Card.Body gap="4">
+                <Image src="../images/img-12.jpg" fit="contain" />
+                <Card.Description>
+                  <Text fontSize="xl">
+                    Ingresa tu experiencia laboral, referencias, proyectos personales y más
+                  </Text>
+                </Card.Description>
+              </Card.Body>
+            </Card.Root>
+            <Icon size="2xl">
+              <FaArrowRight />
+            </Icon>
+            <Card.Root width={'30%'} aspectRatio="square">
+              <Card.Header>
+                <Card.Title>Personaliza tu portafolio</Card.Title>
+              </Card.Header>
+              <Card.Body gap="4">
+                <Image src="../images/img-13.jpg" fit="contain" />
+                <Card.Description>
+                  <Text fontSize="xl">
+                    Desde color hasta tipo de fuente, puedes personalizar tu portafolio
+                  </Text>
+                </Card.Description>
+              </Card.Body>
+            </Card.Root>
+            <Icon size="2xl">
+              <FaArrowRight />
+            </Icon>
+            <Card.Root width={'30%'} aspectRatio="square">
+              <Card.Header>
+                <Card.Title>Comparte tu portafolio</Card.Title>
+              </Card.Header>
+              <Card.Body gap="4">
+                <Image  src="../images/img-15.jpg" fit="contain" />
+                <Card.Description>
+                  <Text fontSize="xl">
+                    Puedes descargar tu portafolio en un archivo PDF
+                  </Text>
+                </Card.Description>
+              </Card.Body>
+            </Card.Root>
+          </HStack>
         </div>
       </div>
     </div>
