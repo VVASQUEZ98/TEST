@@ -1,27 +1,27 @@
 // App.js
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
-import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/pages/Home';
 import Forms from './components/pages/Forms';
 import Products from './components/pages/Products';
-import SignUp from './components/pages/SignUp';
-import Header from "./components/Header";
-import Experience from "./components/Experience";
-import Education from "./components/Education";
-import Skills from "./components/Skills";
-import { ThemeProvider } from './components/ThemeContext';
-import ThemeWrapper from './components/ThemeWrapper';
+
+import { Provider } from "./components/ui/provider"
+import { Profile } from './components/perfil/Profile';
+import { PortafolioPreview } from './components/pages/PortafolioPreview';
+import { Container } from '@chakra-ui/react';
+import ContactForm from './components/ContactForm';
+
 
 function App() {
   const [userData, setUserData] = useState(null);
 
   return (
-    <ThemeProvider>
-      <ThemeWrapper>
-        <Router>
-          <Navbar />
+
+    <Provider>
+      <Router>
+        <Navbar />
+        <Container my="3">
           <Routes>
             <Route path='/' exact element={<Home />} />
             <Route path='/Forms' element={<Forms />} />
@@ -29,28 +29,15 @@ function App() {
             <Route
               path='/sign-up'
               element={
-                !userData ? (
-                  <Forms setUserData={setUserData} />
-                ) : (
-                  <>
-                    <Header
-                      name={userData.name}
-                      title={userData.title}
-                      email={userData.email}
-                      phone={userData.phone}
-                      linkedin={userData.linkedin}
-                    />
-                    <Experience experience={userData.experience} />
-                    <Education education={userData.education} />
-                    <Skills skills={userData.skills} />
-                  </>
-                )
+                !userData ? <Forms setUserData={setUserData} /> : <Profile />
               }
             />
+            <Route path='/preview' element={<PortafolioPreview />} />
           </Routes>
-        </Router>
-      </ThemeWrapper>
-    </ThemeProvider>
+        </Container>
+        <ContactForm/>
+      </Router>
+    </Provider>
   );
 }
 
