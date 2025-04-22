@@ -1,0 +1,22 @@
+.education {
+    margin: 20px;
+  }
+  
+  .education h2 {
+    color: #0073e6;
+    font-size: 2rem;
+  }
+  
+  .degree {
+    margin-bottom: 20px;
+  }
+  
+  .degree h3 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  .degree p {
+    margin: 5px 0;
+    color: #555;
+  }
